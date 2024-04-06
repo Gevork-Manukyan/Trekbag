@@ -1,14 +1,14 @@
-export default function ItemList({ items }) {
+export default function ItemList({ items, handleRemoveItem }) {
   return (
     <ul>
       {items.map((item) => {
-        return <Item key={item.id} item={item} />;
+        return <Item key={item.id} item={item} onClickRemove={handleRemoveItem} />;
       })}
     </ul>
   );
 }
 
-function Item({ item }) {
+function Item({ item, onClickRemove }) {
   return (
     <li className="item">
       <label>
@@ -16,7 +16,7 @@ function Item({ item }) {
         {item.name}
       </label>
 
-      <button>❌</button>
+      <button onClick={() => {onClickRemove(item.id)}}>❌</button>
     </li>
   );
 }
