@@ -23,7 +23,19 @@ function App() {
     const updatedItems = items.filter((item) => item.id !== itemId);
 
     setItems(updatedItems);
-  }
+  };
+
+  const handleToggleItem = (itemId) => {
+    const updatedItems = items.map((item) => {
+      if (item.id === itemId) {
+        return { ...item, checked: !item.checked };
+      }
+
+      return item;
+    });
+
+    setItems(updatedItems);
+  };
 
   const handleMarkAllComplete = () => {
     const updatedItems = items.map((item) => {
@@ -55,7 +67,11 @@ function App() {
 
       <main>
         <Header />
-        <ItemList items={items} handleRemoveItem={handleRemoveItem} />
+        <ItemList
+          items={items}
+          handleToggleItem={handleToggleItem}
+          handleRemoveItem={handleRemoveItem}
+        />
         <Sidebar
           handleMarkAllComplete={handleMarkAllComplete}
           handleMarkAllIncomplete={handleMarkAllIncomplete}
