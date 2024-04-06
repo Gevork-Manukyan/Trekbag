@@ -9,6 +9,8 @@ import { useState } from "react";
 function App() {
   const [items, setItems] = useState(initItems);
 
+  const totalNumberOfItems = items.length;
+
   const handleAddItem = (newItemText) => {
     const newItem = {
       id: new Date().getTime(),
@@ -61,12 +63,16 @@ function App() {
     setItems([]);
   };
 
+  const numCheckedItems = () => {
+    return items.filter((item) => item.checked).length;
+  }
+
   return (
     <>
       <BackgroundHeading />
 
       <main>
-        <Header />
+        <Header numberOfCheckedItems={numCheckedItems()} totalNumberOfItems={totalNumberOfItems} />
         <ItemList
           items={items}
           handleToggleItem={handleToggleItem}
