@@ -1,5 +1,4 @@
 export default function ItemList({ items }) {
-  console.log(items)
   return (
     <ul>
       {items.map((item) => {
