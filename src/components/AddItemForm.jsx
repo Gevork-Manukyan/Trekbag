@@ -1,5 +1,5 @@
-import Button from "./Button";
 import { useRef, useState } from "react";
+import Button from "./Button";
 
 export default function AddItemForm({ onAddItem }) {
   const [itemText, setItemText] = useState("");
@@ -10,7 +10,7 @@ export default function AddItemForm({ onAddItem }) {
 
     if (!itemText) {
       alert("Item cannot be empty!");
-      inputRef.current.focus(); 
+      inputRef.current.focus();
       return;
     }
 
@@ -26,7 +26,12 @@ export default function AddItemForm({ onAddItem }) {
   return (
     <form onSubmit={handleSubmit}>
       <h2>Add an item</h2>
-      <input ref={inputRef} value={itemText} onChange={handleChange} autoFocus />
+      <input
+        ref={inputRef}
+        value={itemText}
+        onChange={handleChange}
+        autoFocus
+      />
       <Button>Add to list</Button>
     </form>
   );
