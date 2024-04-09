@@ -4,10 +4,10 @@ import Header from "./Header";
 import ItemList from "./ItemList";
 import Sidebar from "./Sidebar";
 import { initItems } from "../lib/constants";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
-  const [items, setItems] = useState(initItems);
+  const [items, setItems] = useState(() => JSON.parse(localStorage.getItem("items")) || initItems);
 
   const totalNumberOfItems = items.length;
 
@@ -65,14 +65,21 @@ function App() {
 
   const numCheckedItems = () => {
     return items.filter((item) => item.checked).length;
-  }
+  };
+
+  useEffect(() => {
+    localStorage.setItem("items", JSON.stringify(items));
+  }, [items]);
 
   return (
     <>
       <BackgroundHeading />
 
       <main>
-        <Header numberOfCheckedItems={numCheckedItems()} totalNumberOfItems={totalNumberOfItems} />
+        <Header
+          numberOfCheckedItems={numCheckedItems()}
+          totalNumberOfItems={totalNumberOfItems}
+        />
         <ItemList
           items={items}
           handleToggleItem={handleToggleItem}
