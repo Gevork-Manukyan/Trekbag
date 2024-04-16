@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { initItems } from "../lib/constants";
 
-console.log("INITITEMS: ", initItems);
 export const useItemsStore = create((set) => ({
   items: initItems,
   addItem: (newItemText) => {

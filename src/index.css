@@ -49,8 +49,6 @@ main {
   grid-template-columns: 7fr 4fr;
   grid-template-rows: 59px 1fr;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.08);
-  /* box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px; */
-  /* box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px; */
 }
 
 header {
@@ -74,14 +72,12 @@ header {
   grid-row: 2 / 3;
   background-color: #fff;
   overflow-y: scroll;
-  scrollbar-color: red orange;
-  scrollbar-width: thin;
+  scrollbar-width: 0;
   position: relative;
 }
 
 .item-list::-webkit-scrollbar {
   width: 0;
-  /* width: 8px; */
 }
 
 .item-list::-webkit-scrollbar-track {
@@ -147,11 +143,6 @@ label > input:checked {
   border-color: #6e6251;
   background-color: #6e6251;
 }
-
-/* label > input:focus,
-label > input:active {
-  outline-color: #a1988a;
-} */
 
 label > label {
   cursor: pointer;
