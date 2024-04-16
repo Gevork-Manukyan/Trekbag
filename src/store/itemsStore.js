@@ -1,64 +1,72 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 import { initItems } from "../lib/constants";
 
-export const useItemsStore = create((set) => ({
-  items: initItems,
-  addItem: (newItemText) => {
-    const newItem = {
-      id: new Date().getTime(),
-      name: newItemText,
-      checked: false,
-    };
+export const useItemsStore = create(
+  persist(
+    (set) => ({
+      items: initItems,
+      addItem: (newItemText) => {
+        const newItem = {
+          id: new Date().getTime(),
+          name: newItemText,
+          checked: false,
+        };
 
-    set((state) => ({ items: [...state.items, newItem] }));
-  },
+        set((state) => ({ items: [...state.items, newItem] }));
+      },
 
-  removeItem: (itemId) => {
-    set((state) => {
-      const updatedItems = state.items.filter((item) => item.id !== itemId);
-      return { items: updatedItems };
-    });
-  },
+      removeItem: (itemId) => {
+        set((state) => {
+          const updatedItems = state.items.filter((item) => item.id !== itemId);
+          return { items: updatedItems };
+        });
+      },
 
-  toggleItem: (itemId) => {
-    set((state) => {
-      const updatedItems = state.items.map((item) => {
-        if (item.id === itemId) {
-          return { ...item, checked: !item.checked };
-        }
+      toggleItem: (itemId) => {
+        set((state) => {
+          const updatedItems = state.items.map((item) => {
+            if (item.id === itemId) {
+              return { ...item, checked: !item.checked };
+            }
 
-        return item;
-      });
+            return item;
+          });
 
-      return { items: updatedItems };
-    });
-  },
+          return { items: updatedItems };
+        });
+      },
 
-  markAllComplete: () => {
-    set((state) => {
-      const updatedItems = state.items.map((item) => {
-        return { ...item, checked: true };
-      });
+      markAllComplete: () => {
+        set((state) => {
+          const updatedItems = state.items.map((item) => {
+            return { ...item, checked: true };
+          });
 
-      return { items: updatedItems };
-    });
-  },
+          return { items: updatedItems };
+        });
+      },
 
-  markAllIncomplete: () => {
-    set((state) => {
-      const updatedItems = state.items.map((item) => {
-        return { ...item, checked: false };
-      });
+      markAllIncomplete: () => {
+        set((state) => {
+          const updatedItems = state.items.map((item) => {
+            return { ...item, checked: false };
+          });
 
-      return { items: updatedItems };
-    });
-  },
+          return { items: updatedItems };
+        });
+      },
 
-  resetInitial: () => {
-    set(() => ({ items: initItems }));
-  },
+      resetInitial: () => {
+        set(() => ({ items: initItems }));
+      },
 
-  removeAllItems: () => {
-    set(() => ({ items: [] }));
-  },
-}));
+      removeAllItems: () => {
+        set(() => ({ items: [] }));
+      },
+    }),
+    {
+      name: "items",
+    }
+  )
+);
