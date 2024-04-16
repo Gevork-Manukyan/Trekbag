@@ -1,14 +1,14 @@
 import Counter from "./Counter";
 import Logo from "./Logo";
-import { useItemsContext } from "../lib/hooks";
+import { useItemsStore } from "../store/itemsStore";
 
 export default function Header() {
-  const { totalNumberOfItems, numCheckedItems } = useItemsContext();
-  
+  const items = useItemsStore((state) => state.items);
+
   return (
     <header>
       <Logo />
-      <Counter count={numCheckedItems()} total={totalNumberOfItems} />
+      <Counter count={items.filter((item) => item.checked).length} total={items.length} />
     </header>
   );
 }

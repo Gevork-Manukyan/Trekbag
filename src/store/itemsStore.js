@@ -1,7 +1,8 @@
 import { create } from "zustand";
 import { initItems } from "../lib/constants";
 
-create((set) => ({
+console.log("INITITEMS: ", initItems);
+export const useItemsStore = create((set) => ({
   items: initItems,
   addItem: (newItemText) => {
     const newItem = {
@@ -60,11 +61,5 @@ create((set) => ({
 
   removeAllItems: () => {
     set(() => ({ items: [] }));
-  },
-
-  numCheckedItems: () => {
-    set((state) => ({
-      items: state.items.filter((item) => item.checked).length,
-    }));
   },
 }));
